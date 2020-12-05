@@ -13,7 +13,7 @@ function MovieThumb({ image, movieId, clickable }) {
                 
                 
                 // ? <img className="clickable" src={image} alt="moviethumb" />
-                : <img src="image" alt="moviethumb"/>
+                : <img src={image} alt="moviethumb"/>
             }
 
             {/* {clickable ?

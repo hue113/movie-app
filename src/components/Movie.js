@@ -13,18 +13,20 @@ function Movie({ movieId }) {
     const [ movie, loading, error ] = useMovieFetch(movieId);
     console.log(movie);
 
+    if (error) return <div>Something went wrong! </div>
+    if (loading) return <Spinner />
+    // if (loading || !movie.original_title) return <Spinner />
 
     return (
-        <>
-            <Navigation />
-            <MovieInfo />
+        <div>
+            <Navigation movie={movie.original_title} />
+            <MovieInfo movie={movie}/>
             <MovieInfoBar />
             <Grid>
                 <Actor />
             </Grid>
-            <Spinner />
-            Movie: {movieId}
-        </>
+    
+        </div>
     );
 }
 
