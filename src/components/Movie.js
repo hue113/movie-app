@@ -7,8 +7,13 @@ import Actor from '../components/elements/Actor'
 import Navigation from '../components/elements/Navigation'
 import Grid from '../components/elements/Grid'
 import Spinner from '../components/elements/Spinner'
+import useMovieFetch from './hooks/useMovieFetch';
 
 function Movie({ movieId }) {
+    const [ movie, loading, error ] = useMovieFetch(movieId);
+    console.log(movie);
+
+
     return (
         <>
             <Navigation />
