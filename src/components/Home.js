@@ -4,7 +4,6 @@ import Grid from './elements/Grid';
 import HeroImage from './elements/HeroImage';
 import LoadMoreBtn from './elements/LoadMoreBtn';
 import MovieThumb from './elements/MovieThumb';
-import SearchBar from './elements/SearchBar';
 import Spinner from './elements/Spinner';
 
 // custom Hook
@@ -28,6 +27,14 @@ function Home() {
     }, fetchMovies ] = useHomeFetch(); 
 
     const [searchTerm, setSearchTerm] = useState('');
+
+    const loadMoreMovies = () => {
+        const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${currentPage + 1}`
+        const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${currentPage + 1}`
+
+        const endpoint = searchTerm ? searchEndpoint : popularEndpoint
+        fetchMovies(endpoint);
+    }
 
     if (error) return <div>Something went wrong ...</div>;
     if (!movies[0]) return <Spinner />;
@@ -55,11 +62,12 @@ function Home() {
                     />
                 ))}
             </Grid>  
-
-            <LoadMoreBtn />
-            <MovieThumb />
-            <SearchBar />
-            <Spinner />
+            {loading && <Spinner /> }
+            {currentPage < totalPages && !loading && 
+                <LoadMoreBtn text="Load More" callback={loadMoreMovies}/>
+            }
+            
+            
         </>
     );
 };

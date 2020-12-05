@@ -1,10 +1,12 @@
 import React from 'react';
 
-function LoadMoreBtn(props) {
+import { StyledLoadMoreBtn } from '../styles/StyledLoadMoreBtn';
+
+function LoadMoreBtn({ text, callback }) {
     return (
-        <div>
-            Load more Button
-        </div>
+        <StyledLoadMoreBtn type="button" onClick={callback} >
+            {text}
+        </StyledLoadMoreBtn>
     );
 }
 
