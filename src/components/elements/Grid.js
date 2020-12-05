@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { StyledGrid, StyledGridContent } from '../styles/StyledGrid'
 
@@ -10,6 +11,11 @@ function Grid({ header, children }) {       // destructuring props --> you can u
             <StyledGridContent>{children}</StyledGridContent>
         </StyledGrid>
     );
+}
+
+Grid.propTypes = {
+    header: PropTypes.string
+    // no need to write PropTypes for children
 }
 
 export default Grid;

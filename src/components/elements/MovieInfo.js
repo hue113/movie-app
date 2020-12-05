@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NoImage from '../images/no_image.jpg'
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config'
@@ -45,6 +46,12 @@ function MovieInfo({ movie }) {
             </div>
         </StyledMovieInfo>
     );
+}
+
+MovieInfo.propTypes = {
+    movie: PropTypes.object,
+    directors: PropTypes.array
+
 }
 
 export default MovieInfo;

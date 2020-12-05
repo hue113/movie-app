@@ -8,7 +8,7 @@ import { StyledHeader, StyledRMDBLogo, StyledTMDBLogo } from '../styles/StyledHe
 // 2. Learn how to handle props in styled components
 // 3. Create a global style with styled components
 
-function Header(props) {
+function Header() {
     return (
         <StyledHeader>
             <div className="header-content">
