@@ -6,7 +6,7 @@ export function useHomeFetch() {
     const [ loading, setLoading ] = useState (false);
     const [ error, setError ] = useState (false);
 
-    console.log(state);
+    // console.log(state);
 
     const fetchMovies = async endpoint => {
         setLoading(true)
@@ -15,7 +15,7 @@ export function useHomeFetch() {
         try {
             // why 2 await? --> wait till get api data, then wait till turn that data into json
             const result = await (await fetch(endpoint)).json();    // parse api data into json 
-            console.log(result)
+            // console.log(result)
 
             setState( prevState => ({
                 ...prevState,
