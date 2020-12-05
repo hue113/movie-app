@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { API_URL, API_KEY, IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../../config'
+import { POPULAR_BASE_URL } from '../../config'
 
 export function useHomeFetch() {
     const [ state, setState ] = useState ({ movies: [] });
@@ -37,7 +37,8 @@ export function useHomeFetch() {
 
     // Fetch popular movies initially on mount
     useEffect(() => {
-        fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+        fetchMovies(POPULAR_BASE_URL);
+        // BEFORE: fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
     }, [])  // empty array [] --> useEffect() only run once on mount
 
     return [
