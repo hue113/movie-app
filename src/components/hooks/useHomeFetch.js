@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { POPULAR_BASE_URL } from '../../config'
 
-export function useHomeFetch() {
+export function useHomeFetch({ searchTerm }) {
     const [ state, setState ] = useState ({ movies: [] });
     const [ loading, setLoading ] = useState (false);
     const [ error, setError ] = useState (false);
@@ -32,14 +32,29 @@ export function useHomeFetch() {
             setError(true);
             console.log(error);
         }
-        setLoading(false); 
+        setLoading(false);    
     }
 
     // Fetch popular movies initially on mount
     useEffect(() => {
-        fetchMovies(POPULAR_BASE_URL);
-        // BEFORE: fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+        if (sessionStorage.homeState) {     // check if sessionStorage exists
+            // console.log('Grabbing from sessionStorage')
+            setState( JSON.parse(sessionStorage.homeState)) // use JSON.parse to parse it back into object
+            setLoading(false)    
+        } else {
+            console.log('Grabbing from API')
+            fetchMovies(POPULAR_BASE_URL);
+            // BEFORE: fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+        }
     }, [])  // empty array [] --> useEffect() only run once on mount
+
+    // sessionStorage
+    useEffect( () => {
+        if(!searchTerm) {           // check whether we have searchTerm or not
+            // console.log('Writing to sessionStorage')
+            sessionStorage.setItem('homeState', JSON.stringify(state))
+        }
+    }, [searchTerm, state])         // depends on searchterm & state
 
     return [
             { state, loading, error }, 

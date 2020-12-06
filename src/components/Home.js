@@ -15,6 +15,8 @@ import NoImage from './images/no_image.jpg'
 
 function Home() {
     
+    const [searchTerm, setSearchTerm] = useState('');
+
     // BEFORE: const [{ state, loading, error }, fetchMovies ] = useHomeFetch(); 
     // If you don't want to destructure the state into smaller: movies, currentPage,...
     // you will need to write state.movies / state.currentPage ... whenever you want to use
@@ -25,9 +27,8 @@ function Home() {
             state: { movies, currentPage, totalPages, heroImage },  // destructure state
             loading, 
             error 
-    }, fetchMovies ] = useHomeFetch(); 
+    }, fetchMovies ] = useHomeFetch(searchTerm); 
 
-    const [searchTerm, setSearchTerm] = useState('');
 
     const searchMovies = search => {
         const endpoint = search 

@@ -40,8 +40,21 @@ function useMovieFetch(movieId) {
 
 
     useEffect( () => {
-        fetchData()
-    }, [fetchData])     // if you don't put fetchData in here, it will cause infinite loop
+        // console.log(localStorage.movieId)        // undefined
+        // console.log(localStorage[movieId])       // has value
+        if(localStorage[movieId]) {
+            console.log('Grabbing from localStorage')
+            setState(JSON.parse(localStorage[movieId]))
+            setLoading(false)       // if you don't setLoading(false) --> it will show Spinner because loading=true (Movie.js)
+        } else {
+            console.log('Grabbing from API')
+            fetchData()
+        }
+    }, [fetchData, movieId])     // if you don't put fetchData in here, it will cause infinite loop
+
+    useEffect( () => {
+        localStorage.setItem(movieId, JSON.stringify(state));
+    }, [movieId, state])
 
     return (
         [state, loading, error]
