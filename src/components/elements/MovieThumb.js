@@ -4,12 +4,13 @@ import { Link } from '@reach/router'
 
 import { StyledMovieThumb } from '../styles/StyledMovieThumb'
 
-function MovieThumb({ image, movieId, clickable }) {
+function MovieThumb({ image, movieId, clickable, movieName }) {
     return (
         <StyledMovieThumb>
             {clickable ?
                 <Link to={`/${movieId}`} >
                     <img className="clickable" src={image} alt="moviethumb" />
+                    <p>{movieName}</p>
                 </Link>    
                 
                 
